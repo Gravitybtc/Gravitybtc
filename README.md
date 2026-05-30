@@ -28,3 +28,24 @@ Access completed Gravity records using an Invoice ID.
 - Use Cases: https://gravitybtc.space/use-cases/
 - Record Verification: https://gravitybtc.space/ledger/
 - Public Verifier: https://github.com/Gravitybtc/gravity-public-verifier
+
+
+## Publications
+
+### Articles
+
+Verification Is Becoming More Valuable Than Information
+
+https://gravitybtc.space/articles/2026-05-26-verification-process.html
+
+Gravity Whitepaper v1
+
+https://gravitybtc.space/articles/gravity-whitepaper-v1.html
+
+### Documents
+
+https://gravitybtc.space/documents/
+
+### Public Verifier
+
+https://github.com/Gravitybtc/gravity-public-verifier
