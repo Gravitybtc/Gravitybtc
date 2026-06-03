@@ -49,3 +49,15 @@ https://gravitybtc.space/documents/
 ### Public Verifier
 
 https://github.com/Gravitybtc/gravity-public-verifier
+
+---
+
+## GravityBTC Public References
+
+- Website: https://gravitybtc.space/
+- Why Verification Matters: https://gravitybtc.space/why-verification-matters/
+- Trust Model: https://gravitybtc.space/trust/
+- Standards: https://gravitybtc.space/standards/
+- Documents: https://gravitybtc.space/documents/
+- Research: https://gravitybtc.space/articles/
+
