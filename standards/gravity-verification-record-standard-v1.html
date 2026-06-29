@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Gravity Verification Record Standard v1</title>
-<meta name="description" content="GravityBTC canonical standard: Gravity Verification Standard v1.0">
-<link rel="canonical" href="https://gravitybtc.space/standards/gravity-verification-standard-v1.html">
+<title>Gravity Verification Record Standard v1.0 | GravityBTC Standards</title>
+<meta name="description" content="GravityBTC canonical standard: Gravity Verification Record Standard v1.0">
+<link rel="canonical" href="https://gravitybtc.space/standards/gravity-verification-record-standard-v1.html">
 <link rel="stylesheet" href="/gravity-global-header.css">
 <link rel="stylesheet" href="/gravity-trust-layer.css">
 <link rel="stylesheet" href="/assets/gravity-refinement.css">
@@ -116,49 +116,201 @@ body > .nav a:focus{
 
 <main class="wrap">
 <div class="kicker">Gravity Standard</div>
-<h1>Gravity Verification Standard v1.0</h1>
-<pre># Gravity Verification Standard v1.0
-Standard ID: GVS-1
-Status: Canonical
-Maintainer: GravityBTC
+<h1>Gravity Verification Record Standard v1.0</h1>
+<pre>GRAVITY VERIFICATION RECORD STANDARD
+GVRS-1
+Status: Draft
+Authority: Gravity
+Classification: Public Standard
 
-## Purpose
+============================================================
+1. PURPOSE
+============================================================
 
-The Gravity Verification Standard defines how Gravity records, publications, certifications, and evidence packages are independently checked.
+GVRS-1 defines the Gravity Verification Record.
 
-Verification must confirm:
+A Gravity Verification Record is the primary record created
+by Gravity service workflows. It preserves verification,
+retrieval, continuity, integrity, authority, lifecycle state,
+and independent review capability.
 
-1. The artifact exists.
-2. The artifact has a SHA256 hash.
-3. The hash matches the published verification record.
-4. The verification record identifies the artifact.
-5. The verification path is public or reproducible.
+A Verification Record is not a file, report, transaction,
+hash, or package alone.
 
-## Required Verification Materials
+A Verification Record is the governed relationship between
+an operational event, its associated artifacts, retrieval
+pathways, verification data, integrity references, and
+continuity references.
 
-- canonical artifact
-- SHA256 hash
-- verification record JSON
-- public URL or retrieval path
-- issuer identity
-- timestamp
-- record status
+============================================================
+2. CORE DOCTRINE
+============================================================
 
-## Verification Result
+Gravity creates Verification Records.
 
-A verification result must return one of:
+Gravity delivers Verification Packages.
 
-- verified
-- mismatch
-- unavailable
-- superseded
-- revoked
+A Verification Record is the primary Gravity artifact.
 
-## Gravity Principle
+A Verification Package is the governed container used to
+preserve, retrieve, transport, and independently verify a
+Verification Record.
 
-Verification is not a claim.
+============================================================
+3. REQUIRED RECORD PROPERTIES
+============================================================
 
-Verification is a reproducible process.</pre>
+Every Verification Record SHALL preserve:
+
+- Record Identifier
+- Service Classification
+- Invoice Identifier
+- Creation Timestamp
+- Lifecycle State
+- Integrity Reference
+- Retrieval Reference
+- Verification Instructions
+- Continuity Relationship
+
+Records missing required properties SHALL be considered
+non-compliant.
+
+============================================================
+4. INDEPENDENT VERIFICATION
+============================================================
+
+Verification Records SHALL remain independently verifiable
+without access to:
+
+- Gravity runtime systems
+- Gravity operators
+- Gravity internal databases
+
+Verification SHALL be achievable using governed artifacts,
+integrity references, manifests, hashes, attestations,
+retrieval information, and publicly available verification
+data.
+
+============================================================
+5. RETRIEVAL
+============================================================
+
+Verification Records SHALL support deterministic retrieval.
+
+Retrieval SHALL be governed through invoice authority.
+
+Retrieval information SHALL be preserved within the
+associated Verification Package.
+
+============================================================
+6. CONTINUITY
+============================================================
+
+Verification Records SHALL preserve continuity between:
+
+- Operational Event
+- Verification Record
+- Verification Package
+- Integrity Reference
+- Retrieval Pathway
+- Lifecycle State
+
+Continuity SHALL remain reconstructable through governed
+record artifacts.
+
+============================================================
+7. CANONICAL LIFECYCLE
+============================================================
+
+Every Verification Record SHALL be associated with the
+Gravity Canonical Lifecycle:
+
+1. Request
+2. Invoice
+3. Confirmation
+4. Execution
+5. Artifact Generation
+6. Retrieval
+7. Verification
+
+Verification Records SHALL preserve continuity across all
+applicable lifecycle stages.
+
+============================================================
+8. CERTIFICATION
+============================================================
+
+Certification MAY attest:
+
+- record existence
+- record issuance
+- record review
+- standards compliance
+
+Certification SHALL NOT determine legal validity.
+
+============================================================
+9. GOVERNANCE
+============================================================
+
+Verification Records SHALL be governed by published Gravity
+standards.
+
+Material changes to this standard SHALL follow Gravity
+governance procedures.
+
+============================================================
+10. STANDARD OBJECTIVE
+============================================================
+
+GVRS-1 establishes the record model for Gravity verification,
+retrieval, continuity, authority, lifecycle preservation,
+and independent review.
+
+End of Standard
+
+============================================================
+11. INVOICE AUTHORITY DOCTRINE
+============================================================
+
+Invoice Authority is the root authority for a Gravity
+Verification Record.
+
+A Verification Record SHALL be associated with one Invoice
+Identifier.
+
+An Invoice Identifier MAY govern one or more Verification
+Records.
+
+A Verification Record SHALL NOT exist without an associated
+Invoice Identifier.
+
+Invoice Authority governs retrieval authority, continuity
+authority, and record association.
+
+
+============================================================
+12. VERIFICATION RECORD STATE MODEL
+============================================================
+
+Verification Records SHALL exist in one or more governed
+states.
+
+Canonical states include:
+
+- Pending
+- Issued
+- Retrieved
+- Verified
+- Archived
+
+A Verification Record SHALL preserve its current lifecycle
+state.
+
+State transitions SHALL remain reconstructable through
+associated record artifacts and continuity references.
+
+</pre>
 
 <section class="verify">
 <h2>Standard Verification</h2>
