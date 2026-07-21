@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Gravity Increase Standard V1 | GravityBTC Standards</title>
+<meta name="description" content="GravityBTC standard: gravity-increase-standard-v1">
+<link rel="canonical" href="https://gravitybtc.space/standards/gravity-increase-standard-v1.html">
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Article",
+"headline":"Why a Bitcoin Transaction Is Not a Verification Record",
+"description":"A Bitcoin transaction can prove that an event occurred. A verification record preserves the ability to understand, retrieve, review, and independently reference that event in the future.",
+"author":{
+"@type":"Organization",
+"name":"GravityBTC"
+}
+}
+</script>
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Organization",
+"name":"GravityBTC"
+}
+</script>
+<style>
+:root{--bg:#090909;--panel:#101010;--panel2:#151515;--text:#f2f0ea;--muted:#aaa49a;--line:#2a2824;--accent:#c8a96a;--soft:rgba(200,169,106,.12);--sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at top,rgba(200,169,106,.06),transparent 34rem),var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;line-height:1.65;}
+.article-shell{width:min(1120px,calc(100% - 64px));margin:0 auto;padding:36px 0 80px;}
+.site-header{padding:44px 48px 20px 72px;border-bottom:1px solid var(--line);text-align:left;}
+.brand{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;text-decoration:none;}
+.nav{display:flex;gap:18px;flex-wrap:nowrap;white-space:nowrap;overflow-x:auto;font-size:13px;letter-spacing:.08em;text-transform:uppercase;justify-content:flex-start;align-items:center;}
+.nav a{flex:0 0 auto;color:var(--muted);text-decoration:none;font-weight:600;}
+.nav a:hover{color:var(--text);}
+h1{font-size:clamp(38px,6vw,68px);line-height:1;letter-spacing:-.045em;margin:28px 0 22px;font-weight:650;}
+h2{margin:42px 0 14px;font-size:22px;line-height:1.2;color:var(--text);}
+p,li{color:var(--muted);font-size:16px;}
+ul{padding-left:24px;}
+a{color:var(--accent);}
+hr{border:0;border-top:1px solid var(--line);margin:34px 0;}
+.article-toc,.publication-verification{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:22px;padding:24px;margin:26px 0;box-shadow:0 24px 80px rgba(0,0,0,.26);}
+.publication-verification{max-width:920px;}
+.verification-grid{display:grid;grid-template-columns:180px 1fr;gap:10px 22px;margin-top:14px;}
+.verification-label{color:var(--accent);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.08em;}
+.verification-value{color:var(--muted);word-break:break-word;}
+.article-toc h2,.publication-verification h2{margin-top:0;font-size:15px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);}
+.publication-verification code{word-break:break-all;}
+.infra-footer,.site-footer{margin-top:84px;padding:24px 72px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:nowrap;font-size:13px;color:var(--muted);width:100%;}
+.infra-footer-links,.site-footer-links{display:flex;gap:28px;flex-wrap:nowrap;justify-content:flex-end;white-space:nowrap;}
+.infra-footer a,.site-footer a{color:var(--muted);text-decoration:none;font-weight:600;}
+.infra-footer a:hover,.site-footer a:hover{color:var(--text);}
+</style>
+<link rel="stylesheet" href="/gravity-global-header.css">
+
+<style id="gravity-article-chrome-override">
+body > .gravity-global-brand{
+  display:block;
+  margin:64px 72px 20px 72px;
+  color:#c8a96a;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+body > .nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px;
+  margin:0 72px 56px 72px;
+  padding:0 0 22px 0;
+  border-bottom:1px solid #2a2824;
+}
+body > .nav a{
+  color:#aaa49a;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.article-shell{
+  padding-top:0;
+}
+.infra-footer{
+  margin-top:84px;
+  padding:28px 72px;
+  border-top:1px solid #2a2824;
+  display:flex;
+  justify-content:space-between;
+  gap:40px;
+  flex-wrap:wrap;
+}
+.infra-footer-links{
+  display:flex;
+  gap:24px;
+  flex-wrap:wrap;
+}
+.infra-footer a{
+  color:#aaa49a;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:600;
+}
+</style>
+
+<style id="gravity-article-header-final">
+body > .gravity-global-brand{
+  display:block!important;
+  margin:72px 72px 22px 72px!important;
+  color:#c8a96a!important;
+  text-decoration:none!important;
+  font-size:13px!important;
+  font-weight:700!important;
+  letter-spacing:.18em!important;
+  text-transform:uppercase!important;
+}
+
+body > .nav{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:18px!important;
+  margin:0 72px 58px 72px!important;
+  padding:0 0 22px 0!important;
+  border-bottom:1px solid #2a2824!important;
+}
+
+body > .nav a{
+  color:#aaa49a!important;
+  text-decoration:none!important;
+  font-size:13px!important;
+  font-weight:600!important;
+  letter-spacing:.08em!important;
+  text-transform:uppercase!important;
+}
+</style>
+
+<style id="gravity-standard-block-style">
+.wrap{
+  width:min(900px,calc(100% - 24px));
+  margin:0 auto;
+  padding:28px 0 140px;
+}
+.kicker{
+  color:#c8a96a;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:14px;
+}
+.wrap pre{
+  white-space:pre-wrap;
+  color:#cfc6aa;
+  font-size:16px;
+  background:#111;
+  border:1px solid #2a2824;
+  padding:24px;
+  border-radius:10px;
+}
+.verify{
+  margin-top:44px;
+  border-top:1px solid #2a2824;
+  padding-top:22px;
+  color:#cfc6aa;
+}
+.verify h2{
+  color:#f2f0ea;
+}
+</style>
+
+</head>
+<body>
+<a class="gravity-global-brand" href="/">GRAVITYBTC</a>
+<div class="nav">
+<a href="/">Home</a>
+<a href="/services/">Services</a>
+<a href="/case.html">Case</a>
+<a href="/cert/">Certification</a>
+<a href="/relay/">Relay</a>
+<a href="/retrieve/">Retrieve</a>
+<a href="/policy/">Operational Policy</a>
+<a href="/documents/">Documents</a>
+<a href="/articles/">Research</a>
+<a href="/why-verification-matters/">Why Verification Matters</a>
+<a href="/standards/">Standards</a>
+<a href="/api/">API</a>
+<a href="/about.html">About</a>
+<a href="/trust/">Trust</a>
+<a href="/help/">Help</a>
+<a href="/faq/">FAQ</a>
+<a href="/network-conditions/">Network Conditions</a>
+<a href="/support/">Support</a>
+</div>
+
+<main class="wrap">
+<div class="kicker">Gravity Standard</div>
+<h1>Gravity Increase Standard V1</h1>
+<pre>GRAVITY INCREASE STANDARD
+
+Standard ID: GIS-001
+Version: 1.0
+Status: Canonical
+Authority: Gravity Standards Authority
+Classification: Public Standard
+==================================================
+PURPOSE
+==================================================
+
+The Gravity Increase Standard establishes measurable operational improvement as the governing test for Gravity systems, services, workflows, and engagements.
+
+Technology is not valuable merely because it is advanced.
+
+Automation is not valuable merely because it removes human activity.
+
+Artificial intelligence is not valuable merely because it produces an answer.
+
+A capability creates value when it leaves an operation measurably better than it was before.
+
+==================================================
+OBJECTIVE
+==================================================
+
+The objective of this standard is to ensure that Gravity capabilities are evaluated according to the meaningful operational improvement they produce.
+
+Improvement SHALL be identifiable, reviewable, and proportionate to the purpose and risk of the operation.
+
+==================================================
+CORE PRINCIPLE
+==================================================
+
+Technology is not the product.
+
+Artificial intelligence is not the product.
+
+Automation is not the product.
+
+Software is not the product.
+
+The product is measurable improvement.
+
+Gravity is measured by the increase it produces.
+
+==================================================
+DEFINITION OF INCREASE
+==================================================
+
+An increase is a measurable improvement in the condition, capability, reliability, or performance of an operation.
+
+Increase may result from improving a desirable quality or reducing an undesirable condition.
+
+==================================================
+AREAS OF INCREASE
+==================================================
+
+A Gravity capability MAY create measurable increase in:
+
+Accuracy
+
+Clarity
+
+Confidence
+
+Consistency
+
+Efficiency
+
+Reliability
+
+Reproducibility
+
+Traceability
+
+Transparency
+
+Operational visibility
+
+Decision quality
+
+Institutional knowledge
+
+Accountability
+
+Resilience
+
+Long-term maintainability
+
+==================================================
+AREAS OF REDUCTION
+==================================================
+
+A Gravity capability MAY create measurable increase by reducing:
+
+Ambiguity
+
+Manual effort
+
+Operational friction
+
+Unnecessary complexity
+
+Human error
+
+Information loss
+
+Decision uncertainty
+
+Rework
+
+Operational risk
+
+Recovery time
+
+==================================================
+MEASUREMENT REQUIREMENTS
+==================================================
+
+Claims of improvement SHALL be supported by observable evidence where reasonably possible.
+
+Evidence MAY include:
+
+Reduced processing time
+
+Reduced error frequency
+
+Improved output consistency
+
+Improved reproducibility
+
+Clearer operational records
+
+Stronger auditability
+
+Reduced manual effort
+
+Improved decision confidence
+
+Reduced operational risk
+
+Improved recovery from failure
+
+Improved continuity of institutional knowledge
+
+The evidence required SHALL be proportionate to the importance, scale, and risk of the operation.
+
+==================================================
+THE OPERATIONAL TEST
+==================================================
+
+Before a capability is adopted, expanded, or represented as valuable, the following question SHALL be answered:
+
+Does this capability measurably improve the operation?
+
+The evaluation SHOULD identify:
+
+1. The condition being improved.
+
+2. The baseline against which improvement is evaluated.
+
+3. The evidence used to measure improvement.
+
+4. The period over which improvement is observed.
+
+5. The risks or tradeoffs introduced by the capability.
+
+Without these elements, improvement remains an assertion rather than an operational finding.
+
+==================================================
+TECHNOLOGY AS AN INSTRUMENT
+==================================================
+
+Technology SHALL be treated as an instrument rather than the final measure of value.
+
+Organizations do not benefit merely from possessing more technology.
+
+Organizations benefit from:
+
+Making better decisions
+
+Producing stronger records
+
+Operating with greater confidence
+
+Reducing costly mistakes
+
+Recovering more effectively
+
+Preserving institutional knowledge
+
+Completing work more reliably
+
+Creating more value with available resources
+
+Technology SHOULD therefore be evaluated by the operational condition it produces rather than by its novelty.
+
+==================================================
+APPLICATION
+==================================================
+
+This standard applies to:
+
+Consulting
+
+Analysis
+
+Research
+
+Software systems
+
+Automation
+
+Verification
+
+Certification
+
+Decision support
+
+Operational workflows
+
+Institutional controls
+
+Trading systems
+
+Future Gravity capabilities and services
+
+The standard applies regardless of the specific technology, industry, or operational environment involved.
+
+==================================================
+CONTINUOUS IMPROVEMENT
+==================================================
+
+Increase is not necessarily permanent.
+
+A capability that once produced improvement MAY later become ineffective, obsolete, unnecessarily complex, or operationally harmful.
+
+Gravity systems and services SHOULD therefore be periodically examined for continued improvement in:
+
+Quality
+
+Performance
+
+Resilience
+
+Documentation
+
+Decision-making
+
+Maintainability
+
+Operational confidence
+
+Continued use SHOULD depend on continued value.
+
+==================================================
+INSTITUTIONAL RESPONSIBILITY
+==================================================
+
+Organizations SHALL NOT confuse activity with progress.
+
+More tools do not necessarily create more capability.
+
+More automation does not necessarily create more efficiency.
+
+More data does not necessarily create more understanding.
+
+More documentation does not necessarily create more clarity.
+
+Progress exists when the operational condition is demonstrably improved.
+
+==================================================
+REQUIREMENTS
+==================================================
+
+Every Gravity engagement, capability, service, and system SHALL seek to leave the relevant operation measurably better than it was before.
+
+The improvement SHALL be identifiable.
+
+The supporting evidence SHOULD be reviewable.
+
+The result SHOULD be reproducible where reasonably possible.
+
+The value SHALL remain understandable after the immediate work is complete.
+
+A capability that produces no meaningful operational increase SHALL NOT be represented as operational progress merely because it is technically sophisticated.
+
+==================================================
+CONFORMANCE
+==================================================
+
+A Gravity system, service, capability, or engagement conforms to this standard when it:
+
+Produces an identifiable operational improvement.
+
+Provides evidence sufficient to support the claimed improvement.
+
+Preserves the result in a form that can be reviewed.
+
+Does not represent technical activity as progress when no meaningful increase has occurred.
+
+Conformance SHALL be evaluated against the condition that existed before the capability, service, system, or engagement was introduced.
+
+==================================================
+GOVERNANCE
+==================================================
+
+This standard is governed by the Gravity Standards Authority.
+
+Amendments SHALL be issued through the approved Gravity standards lifecycle.
+
+Material changes SHALL result in a new version and a new verification record.
+
+Superseded versions SHALL remain preserved for evidence continuity.
+
+The Gravity Standards Authority retains final authority over interpretation, amendment, publication, and retirement of this standard.
+
+==================================================
+CONCLUSION
+==================================================
+
+Gravity is not measured by the amount of technology it deploys.
+
+Gravity is measured by the increase it produces.
+
+The governing requirement is:
+
+Leave the operation measurably better than before.
+
+==================================================
+End of Standard
+==================================================</pre>
+
+
+<section class="verify">
+<h2>Standard Verification</h2>
+<p><strong>SHA256:</strong> e660fa9ed43f883c243d29c0adfbdf6f6dec94b4c0cab3e2fe6542fbe72597b2</p>
+<p><strong>Source SHA256:</strong> <code>e660fa9ed43f883c243d29c0adfbdf6f6dec94b4c0cab3e2fe6542fbe72597b2</code></p>
+<p><strong>Template SHA256:</strong> <code>a34c6292cff9a19794a64fb9fc5cb2e463eaafa2231c144cc60dbcd6fb1142d2</code></p>
+<p><strong>Rendered Body SHA256:</strong> <code>5cfe9b4a54bf0ee0ad69306e117d499d6f9f7aa34eb59fdd6cee3f5862b1f65d</code></p>
+<p><strong>Standard Code:</strong> GRAVITY_INCREASE_STANDARD_V1</p>
+<p><strong>Status:</strong> Canonical</p>
+<p><strong>Authority:</strong> Gravity Standards Authority</p>
+<p><strong>Generated UTC:</strong> 2026-07-21T20:21:29Z</p>
+</section>
+
+
+</main>
+<footer class="infra-footer">
+<div>GravityBTC — Institutional Operational Proof Infrastructure</div>
+<div class="infra-footer-links">
+<a href="/documents/">Documents</a>
+<a href="/about.html">About</a>
+<a href="/help/">Help</a>
+<a href="/faq/">FAQ</a>
+<a href="/support/">Support</a>
+<a href="/articles/">Research</a>
+<a href="/standards/">Standards</a><a href="/api/">API</a>
+<a href="/retrieve/">Record Verification</a>
+<a href="/policy/">Operational Policy</a>
+</div>
+</footer>
+</body>
+</html>
