@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Gravity Institutional Transaction Protocol (GITP-001) | GravityBTC Standards</title>
+<meta name="description" content="GravityBTC standard: gitp-001-publish">
+<link rel="canonical" href="https://gravitybtc.space/standards/gitp-001-publish.html">
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Article",
+"headline":"Why a Bitcoin Transaction Is Not a Verification Record",
+"description":"A Bitcoin transaction can prove that an event occurred. A verification record preserves the ability to understand, retrieve, review, and independently reference that event in the future.",
+"author":{
+"@type":"Organization",
+"name":"GravityBTC"
+}
+}
+</script>
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Organization",
+"name":"GravityBTC"
+}
+</script>
+<style>
+:root{--bg:#090909;--panel:#101010;--panel2:#151515;--text:#f2f0ea;--muted:#aaa49a;--line:#2a2824;--accent:#c8a96a;--soft:rgba(200,169,106,.12);--sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at top,rgba(200,169,106,.06),transparent 34rem),var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;line-height:1.65;}
+.article-shell{width:min(1120px,calc(100% - 64px));margin:0 auto;padding:36px 0 80px;}
+.site-header{padding:44px 48px 20px 72px;border-bottom:1px solid var(--line);text-align:left;}
+.brand{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;text-decoration:none;}
+.nav{display:flex;gap:18px;flex-wrap:nowrap;white-space:nowrap;overflow-x:auto;font-size:13px;letter-spacing:.08em;text-transform:uppercase;justify-content:flex-start;align-items:center;}
+.nav a{flex:0 0 auto;color:var(--muted);text-decoration:none;font-weight:600;}
+.nav a:hover{color:var(--text);}
+h1{font-size:clamp(38px,6vw,68px);line-height:1;letter-spacing:-.045em;margin:28px 0 22px;font-weight:650;}
+h2{margin:42px 0 14px;font-size:22px;line-height:1.2;color:var(--text);}
+p,li{color:var(--muted);font-size:16px;}
+ul{padding-left:24px;}
+a{color:var(--accent);}
+hr{border:0;border-top:1px solid var(--line);margin:34px 0;}
+.article-toc,.publication-verification{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:22px;padding:24px;margin:26px 0;box-shadow:0 24px 80px rgba(0,0,0,.26);}
+.publication-verification{max-width:920px;}
+.verification-grid{display:grid;grid-template-columns:180px 1fr;gap:10px 22px;margin-top:14px;}
+.verification-label{color:var(--accent);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.08em;}
+.verification-value{color:var(--muted);word-break:break-word;}
+.article-toc h2,.publication-verification h2{margin-top:0;font-size:15px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);}
+.publication-verification code{word-break:break-all;}
+.infra-footer,.site-footer{margin-top:84px;padding:24px 72px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:nowrap;font-size:13px;color:var(--muted);width:100%;}
+.infra-footer-links,.site-footer-links{display:flex;gap:28px;flex-wrap:nowrap;justify-content:flex-end;white-space:nowrap;}
+.infra-footer a,.site-footer a{color:var(--muted);text-decoration:none;font-weight:600;}
+.infra-footer a:hover,.site-footer a:hover{color:var(--text);}
+</style>
+<link rel="stylesheet" href="/gravity-global-header.css">
+
+<style id="gravity-article-chrome-override">
+body > .gravity-global-brand{
+  display:block;
+  margin:64px 72px 20px 72px;
+  color:#c8a96a;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+body > .nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px;
+  margin:0 72px 56px 72px;
+  padding:0 0 22px 0;
+  border-bottom:1px solid #2a2824;
+}
+body > .nav a{
+  color:#aaa49a;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.article-shell{
+  padding-top:0;
+}
+.infra-footer{
+  margin-top:84px;
+  padding:28px 72px;
+  border-top:1px solid #2a2824;
+  display:flex;
+  justify-content:space-between;
+  gap:40px;
+  flex-wrap:wrap;
+}
+.infra-footer-links{
+  display:flex;
+  gap:24px;
+  flex-wrap:wrap;
+}
+.infra-footer a{
+  color:#aaa49a;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:600;
+}
+</style>
+
+<style id="gravity-article-header-final">
+body > .gravity-global-brand{
+  display:block!important;
+  margin:72px 72px 22px 72px!important;
+  color:#c8a96a!important;
+  text-decoration:none!important;
+  font-size:13px!important;
+  font-weight:700!important;
+  letter-spacing:.18em!important;
+  text-transform:uppercase!important;
+}
+
+body > .nav{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:18px!important;
+  margin:0 72px 58px 72px!important;
+  padding:0 0 22px 0!important;
+  border-bottom:1px solid #2a2824!important;
+}
+
+body > .nav a{
+  color:#aaa49a!important;
+  text-decoration:none!important;
+  font-size:13px!important;
+  font-weight:600!important;
+  letter-spacing:.08em!important;
+  text-transform:uppercase!important;
+}
+</style>
+
+<style id="gravity-standard-block-style">
+.wrap{
+  width:min(900px,calc(100% - 24px));
+  margin:0 auto;
+  padding:28px 0 140px;
+}
+.kicker{
+  color:#c8a96a;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:14px;
+}
+.wrap pre{
+  white-space:pre-wrap;
+  color:#cfc6aa;
+  font-size:16px;
+  background:#111;
+  border:1px solid #2a2824;
+  padding:24px;
+  border-radius:10px;
+}
+.verify{
+  margin-top:44px;
+  border-top:1px solid #2a2824;
+  padding-top:22px;
+  color:#cfc6aa;
+}
+.verify h2{
+  color:#f2f0ea;
+}
+</style>
+
+</head>
+<body>
+<a class="gravity-global-brand" href="/">GRAVITYBTC</a>
+<div class="nav">
+<a href="/">Home</a>
+<a href="/services/">Services</a>
+<a href="/case.html">Case</a>
+<a href="/cert/">Certification</a>
+<a href="/relay/">Relay</a>
+<a href="/retrieve/">Retrieve</a>
+<a href="/policy/">Operational Policy</a>
+<a href="/documents/">Documents</a>
+<a href="/articles/">Research</a>
+<a href="/why-verification-matters/">Why Verification Matters</a>
+<a href="/standards/">Standards</a>
+<a href="/api/">API</a>
+<a href="/about.html">About</a>
+<a href="/trust/">Trust</a>
+<a href="/help/">Help</a>
+<a href="/faq/">FAQ</a>
+<a href="/network-conditions/">Network Conditions</a>
+<a href="/support/">Support</a>
+</div>
+
+<main class="wrap">
+<div class="kicker">Gravity Standard</div>
+<h1>Gravity Institutional Transaction Protocol (GITP-001)</h1>
+<pre># Gravity Institutional Transaction Protocol (GITP-001)
+
+Standard ID: GITP-001
+Version: 1.0
+Status: Canonical
+Authority: Gravity Standards Authority
+Classification: Public Standard
+
+---
+# 1. Purpose
+
+The Gravity Institutional Transaction Protocol (GITP-001) establishes the mandatory process governing every institutional mutation performed within Gravity.
+
+Its purpose is to ensure that every change to institutional records is validated, staged, verified, committed atomically, and permanently preserved with complete audit continuity.
+
+No institutional record shall be modified outside this protocol.
+
+---
+
+# 2. Scope
+
+This protocol applies to every Gravity authority responsible for creating, modifying, transitioning, or preserving institutional records.
+
+Including but not limited to:
+
+• Worker Authority
+
+• Opportunity Authority
+
+• Capital Authority
+
+• Execution Authority
+
+• Knowledge Authority
+
+• Relay Authority
+
+• Case Authority
+
+• Certification Authority
+
+Future authorities capable of mutating institutional records shall conform to this protocol.
+
+---
+
+# 3. Design Objectives
+
+Every institutional transaction shall be:
+
+• Deterministic
+
+• Reproducible
+
+• Atomic
+
+• Auditable
+
+• Recoverable
+
+• Verifiable
+
+• Non-destructive until commit
+
+• Permanently attributable
+
+• Institutionally reviewable
+
+---
+
+# 4. Institutional Rule Zero
+
+Production records shall never be modified directly.
+
+All mutations occur against staged artifacts.
+
+Only fully validated staged artifacts may replace production records.
+
+This rule is mandatory.
+
+---
+
+# 5. Institutional Transaction Lifecycle
+
+Every institutional transaction shall execute the following lifecycle without omission.
+
+Request
+
+↓
+
+Validation
+
+↓
+
+Stage
+
+↓
+
+Verification
+
+↓
+
+Commit Authorization
+
+↓
+
+Atomic Commit
+
+↓
+
+Post-Commit Verification
+
+↓
+
+Checkpoint
+
+No lifecycle stage may be skipped.
+
+---
+
+# 6. Transaction Identity
+
+Every mutation shall produce one institutional transaction.
+
+Example:
+
+WTX-YYYYMMDD-NNNNNN
+
+The transaction identifier uniquely represents the complete institutional mutation.
+
+Transaction identifiers are permanent and shall never be reused.
+
+---
+
+# 7. Required Transaction Artifacts
+
+Every transaction shall produce:
+
+• Transaction Manifest
+
+• Validation Results
+
+• Staged Artifacts
+
+• Verification Results
+
+• Commit Authorization
+
+• Commit Result
+
+• Post-Commit Verification
+
+• Immutable Checkpoint
+
+Incomplete transaction artifacts constitute protocol failure.
+
+---
+
+# 8. Required Verification
+
+Prior to commit every transaction shall verify:
+
+Registry Integrity
+
+Object Integrity
+
+Reference Integrity
+
+Lifecycle Integrity
+
+History Integrity
+
+Transaction Integrity
+
+Checkpoint Integrity
+
+Commit Readiness
+
+Failure of any verification immediately aborts the transaction.
+
+---
+
+# 9. Atomic Commit
+
+Commit represents one indivisible institutional operation.
+
+Partial commits are prohibited.
+
+If commit cannot complete successfully, production records shall remain unchanged.
+
+Atomicity takes precedence over transaction completion.
+
+---
+
+# 10. Post-Commit Verification
+
+Immediately following commit the system shall verify:
+
+Registry integrity
+
+Object integrity
+
+Lifecycle transition
+
+Reference continuity
+
+Transaction references
+
+History continuity
+
+Checkpoint creation
+
+Commit completion
+
+Failures require institutional investigation.
+
+---
+
+# 11. Immutable Checkpoints
+
+Every successful transaction shall generate an immutable checkpoint.
+
+The checkpoint shall contain:
+
+Modified institutional artifacts
+
+Transaction Manifest
+
+Verification Results
+
+SHA256 Manifest
+
+Checkpoint Metadata
+
+Published checkpoints become read-only.
+
+---
+
+# 12. Failure Handling
+
+Upon any failure the protocol shall:
+
+Abort immediately
+
+Preserve production records
+
+Preserve staged artifacts
+
+Record failure reason
+
+Record verification state
+
+Prevent partial mutation
+
+Require new authorization before retry
+
+No automatic recovery process may modify production records.
+
+---
+
+# 13. Security Requirements
+
+The protocol shall preserve:
+
+Evidence continuity
+
+Audit continuity
+
+Object attribution
+
+Transaction attribution
+
+History continuity
+
+Deterministic reconstruction
+
+Reproducible verification
+
+Silent modification is prohibited.
+
+---
+
+# 14. Institutional Vocabulary
+
+Standard transaction objects include:
+
+WTX — Institutional Transaction
+
+WCR — Creation Request
+
+WAR — Authorization Request
+
+WTR — Transition Request
+
+WEV — Institutional Event
+
+WVR — Verification Result
+
+WCP — Immutable Checkpoint
+
+Additional authority-specific objects may be introduced without modifying the protocol.
+
+---
+
+# 15. Reference Transaction Model
+
+Every institutional mutation follows the same execution model.
+
+Request
+
+↓
+
+Validate
+
+↓
+
+Stage
+
+↓
+
+Verify
+
+↓
+
+Authorize Commit
+
+↓
+
+Atomic Commit
+
+↓
+
+Post-Commit Verify
+
+↓
+
+Checkpoint
+
+The protocol governs the mutation process rather than the object being mutated.
+
+---
+
+# 16. Conformance
+
+Any Gravity authority claiming compliance with GITP-001 shall implement every mandatory lifecycle stage defined by this standard.
+
+Partial implementation does not constitute conformance.
+
+Compliance shall be evaluated against the protocol as a whole rather than individual lifecycle stages.
+
+---
+
+# 17. Relationship to Other Standards
+
+GITP-001 defines the institutional mutation protocol for Gravity.
+
+Operational standards governing Worker Authority, Opportunity Authority, Capital Authority, Certification, Relay, Case, Knowledge, and future authorities shall inherit this protocol.
+
+Authority-specific standards define what is mutated.
+
+GITP-001 defines how mutation occurs.
+
+---
+
+# 18. Guiding Principle
+
+Institutional integrity is preserved not by preventing change, but by ensuring that every change is objective, reproducible, verifiable, atomic, and permanently attributable.
+
+Every institutional mutation shall leave a complete evidentiary trail capable of independent reconstruction.
+
+No mutation exists without institutional accountability.</pre>
+
+
+<section class="verify">
+<h2>Standard Verification</h2>
+<p><strong>SHA256:</strong> f043601507fe82246e77efe9424e2b9db7df61b173c9e6d59f84c20b3154e7c5</p>
+<p><strong>Source SHA256:</strong> <code>f043601507fe82246e77efe9424e2b9db7df61b173c9e6d59f84c20b3154e7c5</code></p>
+<p><strong>Template SHA256:</strong> <code>a34c6292cff9a19794a64fb9fc5cb2e463eaafa2231c144cc60dbcd6fb1142d2</code></p>
+<p><strong>Rendered Body SHA256:</strong> <code>607330d9f2f4cab0f0d327f6145732be471746dca3039d654298d7f526de3b85</code></p>
+<p><strong>Standard Code:</strong> GITP_001_PUBLISH</p>
+<p><strong>Status:</strong> Canonical</p>
+<p><strong>Authority:</strong> Gravity Standards Authority</p>
+<p><strong>Generated UTC:</strong> 2026-07-28T20:26:56Z</p>
+</section>
+
+
+</main>
+<footer class="infra-footer">
+<div>GravityBTC — Institutional Operational Proof Infrastructure</div>
+<div class="infra-footer-links">
+<a href="/documents/">Documents</a>
+<a href="/about.html">About</a>
+<a href="/help/">Help</a>
+<a href="/faq/">FAQ</a>
+<a href="/support/">Support</a>
+<a href="/articles/">Research</a>
+<a href="/standards/">Standards</a><a href="/api/">API</a>
+<a href="/retrieve/">Record Verification</a>
+<a href="/policy/">Operational Policy</a>
+</div>
+</footer>
+</body>
+</html>
